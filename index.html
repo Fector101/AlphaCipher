@@ -185,13 +185,19 @@
     }
 
     function decryptNumbers() {
-      const input = document.getElementById("numberInput").value;
-      const result = input.split(' ')
-        .map(num => numberToLetter(num))
-        .join('');
+  const input = document.getElementById("numberInput").value.trim();
+  const result = input
+    .split('  ') // Split by double spaces to identify word boundaries
+    .map(word =>
+      word
+        .split(' ') // Split each word into numbers by single space
+        .map(num => numberToLetter(num)) // Convert each number to a letter
+        .join('') // Join letters back into a word
+    )
+    .join(' '); // Join words with a single space for output
 
-      document.getElementById("decryptedOutput").textContent = result;
-    }
+  document.getElementById("decryptedOutput").textContent = result;
+}
 
     function toggleTheme() {
       document.body.classList.toggle("dark");
